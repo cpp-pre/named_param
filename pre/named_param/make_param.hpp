@@ -1,14 +1,30 @@
 #pragma once
 
+#include <pre/fwd/fwd.hpp>
+
 namespace pre::named_param {
 
   template<template <class> class Template>
   struct make_param_t {
+      template<typename Handler>
+      constexpr Template<Handler> operator()(Handler handler) const {return Template<Handler>(handler);}
       template<typename NamedParameter>
       constexpr Template<NamedParameter> operator= (NamedParameter handler) const {return Template<NamedParameter>(handler);}
   };
 
   struct named_parameter {};
+
+  template <class T>
+  struct value_ : named_parameter {
+
+    explicit value_(T v) : v_(v) {}
+
+    operator T() const {
+      return v_;
+    }
+
+    T v_;
+  };
 
   template <class Callable>
   struct unary_ : named_parameter
@@ -18,7 +34,7 @@ namespace pre::named_param {
     template<class TReturn>
     void operator()(TReturn&& e)
     {
-        f_(XXHR_FWD(e));
+        f_(PRE_FWD(e));
     }
 
     private:
