@@ -27,14 +27,20 @@ namespace pre::named_param {
   };
 
   template <class Callable>
-  struct unary_ : named_parameter
+  struct nary_ : named_parameter
   {
-    explicit unary_(Callable f) : f_(f) {}
+    explicit nary_(Callable f) : f_(f) {}
 
-    template<class TReturn>
-    void operator()(TReturn&& e)
+    template<class... TReturn>
+    void operator()(TReturn&&... e)
     {
-        f_(PRE_FWD(e));
+        f_(PRE_FWD(e)...);
+    }
+
+    template<class... TReturn>
+    void operator()(TReturn&&... e) const
+    {
+        f_(PRE_FWD(e)...);
     }
 
     private:

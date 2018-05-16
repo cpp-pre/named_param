@@ -4,7 +4,7 @@
 // Your named parameter
 constexpr pre::named_param::make_param_t<pre::named_param::value_> x; 
 constexpr pre::named_param::make_param_t<pre::named_param::value_> y; 
-constexpr pre::named_param::make_param_t<pre::named_param::unary_> special_callback_named;
+constexpr pre::named_param::make_param_t<pre::named_param::nary_> special_callback_named;
 
 // Your API that you want to define a named callback for
 int simple_api (pre::named_param::value_<int> x, pre::named_param::value_<int> y) {
@@ -12,7 +12,7 @@ int simple_api (pre::named_param::value_<int> x, pre::named_param::value_<int> y
 }
 
 template <class CallbackType>
-inline void same_api_with_callback( pre::named_param::value_<int> x, pre::named_param::value_<int> y, pre::named_param::unary_<CallbackType> named ) {
+inline void same_api_with_callback( pre::named_param::value_<int> x, pre::named_param::value_<int> y, pre::named_param::nary_<CallbackType> named ) {
   named(x + y);
 }
 
