@@ -12,7 +12,13 @@ An example would be :
 ```
 
 ## Usage
-See [INSTALL](./INSTALL.md) and [simple_named_parameter.cpp](./examples/simple_named_parameter.cpp) for an example.
+It's header only, and can easily be used with [`nxxm .`](https://nxxm.github.io/), in your `.nxxm/deps` :
+
+```
+{
+  "cpp-pre/named-params" : { "@" : "feature/nxxm-migration" }
+}
+```
 
 # License
 [Boost Sofware License](./LICENSE.md), please just reproduce copyrights : 
